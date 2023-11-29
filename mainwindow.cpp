@@ -43,3 +43,41 @@ MainWindow::MainWindow()
 
     startTimer(1000);
 }
+
+void MainWindow::timerEvent(QTimerEvent *e)
+{
+    Q_UNUSED(e);
+    timelbl->setText(QTime::currentTime().toString());
+    if(timers.size() > 0){
+        for(int i = 0; i < timers.size(); i++){
+            timers[i].setTime(timers[i].getTime().addMSecs(-500));
+            listW->item(i)->setText(timers[i].getTime().toString());
+        }
+        if(!stoppedTimersPositions.empty()){
+            for(int i = 0; i < stoppedTimersPositions.size(); i++){
+                timers[stoppedTimersPositions[i]].setTime(timers[stoppedTimersPositions[i]].getTime().addMSecs(500));
+            }
+        }
+        mainTimerLbl->setText(timers[0].getTime().toString());
+        mainTimerDescriptionLbl->setText(timers[0].getDesc());
+
+        if(timers[0].getTime() == temp){
+            timeoutWindow();
+            timers.removeAt(0);
+            delete listW->takeItem(0);
+        }
+
+        for(int i = 0; i < timers.size(); i++){
+            if(timers[i].getTime() == temp){
+                stoppedTimersPositions.append(i);
+                timers.removeAt(i);
+                delete listW->takeItem(i);
+            }
+
+        }
+
+    } else {
+        mainTimerDescriptionLbl->setText("\0");
+    }
+}
+
