@@ -5,7 +5,12 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
+
+    MainWindow window;
+
+    window.setFixedSize(500,450);
+    window.setWindowTitle("Розумний таймер");
+    window.show();
+
     return a.exec();
 }
