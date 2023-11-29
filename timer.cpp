@@ -21,3 +21,8 @@ QString Timer::getDesc()
 {
     return description;
 }
+
+void Timer::setDesc(QString newDesc)
+{
+    description = newDesc;
+}
