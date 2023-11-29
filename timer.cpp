@@ -12,3 +12,7 @@ Timer::Timer(QTime time, QString description)
     this->description = description;
 }
 
+QTime Timer::getTime()
+{
+    return time;
+}
