@@ -16,3 +16,8 @@ QTime Timer::getTime()
 {
     return time;
 }
+
+QString Timer::getDesc()
+{
+    return description;
+}
