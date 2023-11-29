@@ -26,3 +26,14 @@ void Timer::setDesc(QString newDesc)
 {
     description = newDesc;
 }
+
+void Timer::timerEvent(QTimerEvent *event)
+{
+    Q_UNUSED(event);
+}
+
+Timer::Timer()
+{
+    this->time.setHMS(0,0,0);
+    this->description = "\0";
+}
