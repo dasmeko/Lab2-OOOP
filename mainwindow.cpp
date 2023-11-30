@@ -256,3 +256,21 @@ void MainWindow::addTimerBtnClicked()
     }
     updateTimersListW();
 }
+
+void MainWindow::stopTimer()
+{
+    for(int i = 0; i < timers.size(); i++){
+        if(timers[i].getTime().toString() == listW->selectedItems().first()->text()){
+            if(!stoppedTimersPositions.empty()){
+                for(int j = 0; j < stoppedTimersPositions.size(); j++){
+                    if(i != stoppedTimersPositions[j]){
+                        stoppedTimersPositions.append(i);
+                    } else {
+                        stoppedTimersPositions.removeAt(j);
+                    }
+                }
+            } else
+                stoppedTimersPositions.append(i);
+        }
+    }
+}
