@@ -91,3 +91,43 @@ QList<Timer> MainWindow::getTimers()
         return timers;
     } else qDebug() << "No!" << Qt::endl;
 }
+
+void MainWindow::setToolBar()
+{
+    QPixmap addpix("add.png");
+    QPixmap editpix("edit.png");
+    QPixmap deletepix("delete.png");
+    QPixmap deleteallpix("deleteAll.png");
+    QPixmap infopix("info.png");
+    QPixmap stoppix("stop.jpg");
+
+    toolbar = addToolBar("Main Toolbar");
+    toolbar->setFixedHeight(50);
+    toolbar->setStyleSheet("QToolBar{spacing:10px;}");
+
+    toolbar->addSeparator();
+    QAction *add = toolbar->addAction(QIcon(addpix),"New Timer");
+    QAction *stop = toolbar->addAction(QIcon(stoppix),"Stop timer");
+    QAction *edit = toolbar->addAction(QIcon(editpix),"Edit Timer");
+    QAction *dlete = toolbar->addAction(QIcon(deletepix),"Delete Timer");
+    QAction *dleteAll = toolbar->addAction(QIcon(deleteallpix),"Delete All Timers");
+    QAction *info = toolbar->addAction(QIcon(infopix),"Timer's Info");
+    toolbar->setMovable(false);
+    toolbar->addSeparator();
+
+    QLabel *lbl = new QLabel("Current time: ");
+
+    toolbar->addWidget(lbl);
+
+    timelbl = new QLabel(QTime::currentTime().toString());
+    startTimer(1000);
+    toolbar->addWidget(timelbl);
+
+    connect(stop, &QAction::triggered, this, &MainWindow::stopTimer);
+    connect(add, &QAction::triggered, this, &MainWindow::addTimer);
+    connect(edit, &QAction::triggered, this, &MainWindow::toEditWindow);
+    connect(dlete, &QAction::triggered, this, &MainWindow::deleteTimer);
+    connect(dleteAll, &QAction::triggered, this, &MainWindow::deleteAllTimers);
+    connect(info, &QAction::triggered, this, &MainWindow::settingsWindowSlot);
+}
+
