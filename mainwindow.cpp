@@ -81,3 +81,13 @@ void MainWindow::timerEvent(QTimerEvent *e)
     }
 }
 
+QList<Timer> MainWindow::getTimers()
+{
+    if(timers.size() > 0){
+        for(int i = 0; i < timers.size(); i++){
+            qDebug() << timers[i].getTime();
+            qDebug() << timers[i].getDesc() << Qt::endl;
+        }
+        return timers;
+    } else qDebug() << "No!" << Qt::endl;
+}
