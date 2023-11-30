@@ -287,3 +287,18 @@ void MainWindow::editTimerBtnClicked()
 
     editWindow->close();
 }
+
+void MainWindow::deleteTimer()
+{
+    for(int i = 0; i < timers.size(); i++){
+        if(listW->selectedItems().first()->text() == timers[i].getTime().toString()){
+            timers.removeAt(i);
+            positionToEdit = i;
+        }
+    }
+    delete listW->takeItem(positionToEdit);
+    if(timers.empty()){
+        mainTimerLbl->setText("00:00:00");
+        mainTimerDescriptionLbl->setText("\0");
+    }
+}
