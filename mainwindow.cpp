@@ -274,3 +274,16 @@ void MainWindow::stopTimer()
         }
     }
 }
+
+void MainWindow::editTimerBtnClicked()
+{
+    QTime time(editTimeEdit->time().hour(),editTimeEdit->time().minute(),editTimeEdit->time().second());
+
+    timers[positionToEdit].setTime(time);
+    timers[positionToEdit].setDesc(editDescEdit->toPlainText());
+
+    buffer.setTime(time);
+    buffer.setDesc(editDescEdit->toPlainText());
+
+    editWindow->close();
+}
