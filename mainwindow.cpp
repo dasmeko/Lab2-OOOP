@@ -131,3 +131,39 @@ void MainWindow::setToolBar()
     connect(info, &QAction::triggered, this, &MainWindow::settingsWindowSlot);
 }
 
+void MainWindow::addTimer()
+{
+    addWindow = new QWidget();
+    addWindow->resize(250,200);
+    addWindow->setWindowTitle("New Timer");
+
+    addTimerLbl = new QLabel("Time");
+    addTimerLbl->setGeometry(20,60,50,20);
+
+    addTimeEdit = new QTimeEdit();
+    addTimeEdit->setDisplayFormat("hh:mm:ss");
+    addTimeEdit->setGeometry(90,65,100,25);
+
+    addDescLbl = new QLabel("Description");
+    addDescLbl->setGeometry(20, 100, 50, 20);
+
+    addTextEdit = new QTextEdit();
+    addTextEdit->setGeometry(90,130,100,150);
+
+    addCountLbl = new QLabel("Count of timers");
+    addCountTextEdit = new QTextEdit();
+
+    QPushButton *addBtn = new QPushButton("Set Timer",addWindow);
+
+    addWindow->setLayout(new QVBoxLayout());
+    addWindow->layout()->addWidget(addTimerLbl);
+    addWindow->layout()->addWidget(addTimeEdit);
+    addWindow->layout()->addWidget(addDescLbl);
+    addWindow->layout()->addWidget(addTextEdit);
+    addWindow->layout()->addWidget(addCountLbl);
+    addWindow->layout()->addWidget(addCountTextEdit);
+    addWindow->layout()->addWidget(addBtn);
+
+    connect(addBtn, &QPushButton::clicked, this, &MainWindow::addTimerBtnClicked);
+    addWindow->show();
+}
