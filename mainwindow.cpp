@@ -167,3 +167,29 @@ void MainWindow::addTimer()
     connect(addBtn, &QPushButton::clicked, this, &MainWindow::addTimerBtnClicked);
     addWindow->show();
 }
+
+void MainWindow::timeoutWindow()
+{
+    QVBoxLayout *vbox = new QVBoxLayout();
+
+    QSound *sound=new QSound("AlarmClock.wav", this);
+    sound->play();
+
+    signalWindow = new QWidget();
+    signalWindow->resize(250,200);
+    signalWindow->setObjectName("TIMEOUT!");
+    timeoutLbl = new QLabel("Timeout! There is description:");
+    timeoutDescLbl = new QTextEdit(this);
+    timeoutDescLbl->setText(timers[0].getDesc());
+    timeoutDescLbl->setReadOnly(true);
+    timeoutOKBtn = new QPushButton("OK", this);
+
+    vbox->addWidget(timeoutLbl);
+    vbox->addWidget(timeoutDescLbl);
+    vbox->addWidget(timeoutOKBtn);
+
+    connect(timeoutOKBtn, &QPushButton::clicked, signalWindow, &QPushButton::close);
+
+    signalWindow->show();
+    signalWindow->setLayout(vbox);
+}
