@@ -237,3 +237,22 @@ void MainWindow::toEditWindow()
     editWindow->setLayout(vbox);
     editWindow->show();
 }
+
+void MainWindow::addTimerBtnClicked()
+{
+    QTime time(addTimeEdit->time().hour(),addTimeEdit->time().minute(),addTimeEdit->time().second());
+    Timer timer(time,addTextEdit->toPlainText());
+    for(int i = 0; i < addCountTextEdit->toPlainText().toInt(); i++){
+        timers.append(timer);
+    }
+    addWindow->close();
+    timersSort();
+    if(timers.empty()){
+        mainTimerLbl->setText("00:00:00");
+        mainTimerDescriptionLbl->setText(" ");
+    } else {
+        mainTimerLbl->setText(timers[0].getTime().toString());
+        mainTimerDescriptionLbl->setText(timers[0].getDesc());
+    }
+    updateTimersListW();
+}
