@@ -193,3 +193,47 @@ void MainWindow::timeoutWindow()
     signalWindow->show();
     signalWindow->setLayout(vbox);
 }
+
+void MainWindow::toEditWindow()
+{
+    if(!timers.empty()){
+        tmp = listW->selectedItems().first()->text();
+        if(tmp == "\0"){
+            QMessageBox::warning(this,tr("Choose the timer"),tr("Please, choose the timer in Timers tab"));
+            return;
+        }
+    } else {
+        QMessageBox::warning(this,tr("Timers is empty"),tr("Timers is empty"));
+        return;
+    }
+
+    for(int i = 0; i < timers.size(); i++){
+        if(tmp == timers[i].getTime().toString()){
+            positionToEdit = i;
+            buffer.setTime(timers[i].getTime());
+            buffer.setDesc(timers[i].getDesc());
+        }
+    }
+    editWindow = new QWidget();
+    editWindow->resize(200,250);
+    editWindow->setObjectName("Edit Timers");
+
+    QVBoxLayout *vbox = new QVBoxLayout();
+
+    editTimeLbl = new QLabel("Edit time:");
+    editDescLbl = new QLabel("Edit description:");
+    editTimeEdit = new QTimeEdit();
+    editTimeEdit->setDisplayFormat("hh:mm:ss");
+    editDescEdit = new QTextEdit();
+    editTimerBtn = new QPushButton("OK");
+
+    vbox->addWidget(editTimeLbl);
+    vbox->addWidget(editTimeEdit);
+    vbox->addWidget(editDescLbl);
+    vbox->addWidget(editDescEdit);
+    vbox->addWidget(editTimerBtn);
+
+    connect(editTimerBtn, &QPushButton::clicked, this, &MainWindow::editTimerBtnClicked);
+    editWindow->setLayout(vbox);
+    editWindow->show();
+}
