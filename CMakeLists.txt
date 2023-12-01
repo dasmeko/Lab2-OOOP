@@ -26,6 +26,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         timer.cpp
         timer.h
         README.md
+        ../../Downloads/add.png ../../Downloads/delete.png ../../Downloads/deleteAll.png  ../../Downloads/info.png ../../Downloads/stop.png
+        ../../Downloads/edit.png
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET Lab2OOOP APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

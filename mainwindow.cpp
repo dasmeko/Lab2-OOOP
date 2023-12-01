@@ -351,3 +351,12 @@ void MainWindow::timersSort() {
             }
     } else return;
 }
+
+void MainWindow::updateTimersListW()
+{
+    listW->clear();
+    for(int i = 0; i < timers.size(); i++){
+        listW->addItem(timers[i].getTime().toString());
+    }
+}
+
