@@ -310,3 +310,24 @@ void MainWindow::deleteAllTimers()
     mainTimerLbl->setText("00:00:00");
     mainTimerDescriptionLbl->setText("\0");
 }
+
+void MainWindow::settingsWindowSlot()
+{
+    settingsWindow = new QWidget;
+    QVBoxLayout *vbox = new QVBoxLayout();
+    QHBoxLayout *hbox = new QHBoxLayout();
+
+    infoOKBtn = new QPushButton("OK");
+
+    hbox->addWidget(doNotLbl);
+    hbox->addWidget(doNotCheckBox);
+    vbox->addLayout(hbox);
+    vbox->addWidget(infoOKBtn);
+
+    settingsWindow->setLayout(vbox);
+    settingsWindow->setObjectName("Settings");
+    settingsWindow->setFixedSize(250,150);
+    settingsWindow->show();
+
+    connect(infoOKBtn, &QPushButton::clicked, this, &MainWindow::infoOKBtnClicked);
+}
