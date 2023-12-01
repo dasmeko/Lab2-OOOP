@@ -331,3 +331,9 @@ void MainWindow::settingsWindowSlot()
 
     connect(infoOKBtn, &QPushButton::clicked, this, &MainWindow::infoOKBtnClicked);
 }
+
+void MainWindow::infoOKBtnClicked()
+{
+    doNotDisturb = doNotCheckBox->isChecked();
+    settingsWindow->close();
+}
