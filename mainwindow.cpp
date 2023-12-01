@@ -302,3 +302,11 @@ void MainWindow::deleteTimer()
         mainTimerDescriptionLbl->setText("\0");
     }
 }
+
+void MainWindow::deleteAllTimers()
+{
+    timers.clear();
+    listW->clear();
+    mainTimerLbl->setText("00:00:00");
+    mainTimerDescriptionLbl->setText("\0");
+}
